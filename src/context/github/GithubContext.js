@@ -25,7 +25,7 @@ export const GithubProvider = ({children})=>{
         })
         const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
             headers:{
-                Authorization: `token ${GITHUB_TOKEN}`
+                Authorization: `token: ${GITHUB_TOKEN}`
             }
         })
         const {items} = await response.json()
@@ -43,7 +43,7 @@ export const GithubProvider = ({children})=>{
         setLoading()
         const response = await fetch(`${GITHUB_URL}/users/${login}`, {
             headers:{
-                Authorization: `token ${GITHUB_TOKEN}`
+                Authorization: `token: ${GITHUB_TOKEN}`
             }
         })
 
@@ -73,7 +73,7 @@ export const GithubProvider = ({children})=>{
         })
         const response = await fetch(`${GITHUB_URL}/users/${login}/repos?${params}`, {
             headers:{
-                Authorization: `token ${GITHUB_TOKEN}`
+                Authorization: `token: ${GITHUB_TOKEN}`
             }
         })
         const data = await response.json()
@@ -97,7 +97,10 @@ export const GithubProvider = ({children})=>{
     })
 
     return <GithubContext.Provider value={{
-        ...state,
+        users:state.users,
+        loading:state.loading,
+        user: state.user,
+        repos: state.repos,
         searchUsers,
         clearUsers,
         getUser,
